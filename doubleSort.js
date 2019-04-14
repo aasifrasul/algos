@@ -18,10 +18,12 @@ var doubleSort = arr => {
 		j = 0,
 		iMin,
 		iMax,
-		cur;
-	for (j = 0; j < count / 2 + 1; j++) {
-		cur = iMin = iMax = count - j - 1;
-		for (i = cur; i > j; i--) {
+		iCur,
+		maxCHecks = Math.floor(count / 2) + 1;
+	for (j = 0; j < maxCHecks; j++) {
+		iMin = j;
+		iCur = iMax = count - j - 1;
+		for (i = iCur; i > j; i--) {
 			// Identify the min and max for this iteration.
 			if (arr[iMin] > arr[i]) {
 				iMin = i;
@@ -30,17 +32,15 @@ var doubleSort = arr => {
 				iMax = i;
 			}
 		}
-		// If min and max points to the same element, then the array has been sorted completely.
-		if (iMin === iMax) return arr;
 		// Place the identified min and max to their correct position, i.e. at the extreme end.
 		if (arr[j] > arr[iMin]) {
 			const temp = arr[j];
 			arr[j] = arr[iMin];
 			arr[iMin] = temp;
 		}
-		if (arr[cur] < arr[iMax]) {
-			const temp = arr[cur];
-			arr[cur] = arr[iMax];
+		if (arr[iCur] < arr[iMax]) {
+			const temp = arr[iCur];
+			arr[iCur] = arr[iMax];
 			arr[iMax] = temp;
 		}
 	}
