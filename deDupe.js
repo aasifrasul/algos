@@ -1,7 +1,4 @@
 var deDupeArray = arr => {
-	if (!this.isValidArray(arr)) {
-		return arr;
-	}
 	const count = arr.length;
 	const hash = {};
 	const uniqueVals = [];
