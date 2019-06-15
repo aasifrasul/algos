@@ -12,39 +12,43 @@
 // min and max points to the same element
 // At this point the array is completely sorted
 
+var swap = (arr, i, j) => {
+	var temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
+	return arr;
+};
+
 var doubleSort = arr => {
-	let count = arr.length;
+	var count = arr.length,
+		maxChecks = Math.ceil(count / 2);
 	let i = 0,
 		j = 0,
 		iMin,
 		iMax,
-		iCur,
-		maxCHecks = Math.floor(count / 2) + 1;
-	for (j = 0; j < maxCHecks; j++) {
+		iCur;
+	for (j = 0; j < maxChecks; j++) {
 		iMin = j;
 		iCur = iMax = count - j - 1;
-		for (i = iCur; i > j; i--) {
+		console.info('iCur', arr[iCur]);
+		for (i = j; i < (count - j); i++) {
 			// Identify the min and max for this iteration.
-			if (arr[iMin] > arr[i]) {
-				iMin = i;
-			}
-			if (arr[iMax] < arr[i]) {
-				iMax = i;
-			}
+			arr[i] < arr[iMin] && (iMin = i);
+			arr[i] > arr[iMax] && (iMax = i);
 		}
+		console.info('min', arr[iMin]);
+		console.info('max', arr[iMax]);
 		// Place the identified min and max to their correct position, i.e. at the extreme end.
-		if (arr[j] > arr[iMin]) {
-			const temp = arr[j];
-			arr[j] = arr[iMin];
-			arr[iMin] = temp;
+		if (iMax === j) {
+			arr[iCur] < arr[iMax] && (arr = swap(arr, iCur, iMax));
+			arr[j] > arr[iMin] && (arr = swap(arr, j, iMin));
+		} else {
+			arr[j] > arr[iMin] && (arr = swap(arr, j, iMin));
+			arr[iCur] < arr[iMax] && (arr = swap(arr, iCur, iMax));
 		}
-		if (arr[iCur] < arr[iMax]) {
-			const temp = arr[iCur];
-			arr[iCur] = arr[iMax];
-			arr[iMax] = temp;
-		}
+		console.info('arr', arr);
 	}
 	return arr;
 };
 
-doubleSort([6, 3, 1, 7, 9, 4, 5, 2, 7]);
+doubleSort([10, 6, 3, 1, 7, 9, 4, 5, 2, 7]);
