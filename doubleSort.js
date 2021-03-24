@@ -30,14 +30,17 @@ var doubleSort = arr => {
 	for (j = 0; j < maxChecks; j++) {
 		iMin = j;
 		iCur = iMax = count - j - 1;
-		console.info('iCur', arr[iCur]);
-		for (i = j; i < (count - j); i++) {
+		if (iMin >= iMax) {
+			break;
+		}
+		// console.info('iCur', arr[iCur]);
+		for (i = j; i < count - j; i++) {
 			// Identify the min and max for this iteration.
 			arr[i] < arr[iMin] && (iMin = i);
 			arr[i] > arr[iMax] && (iMax = i);
 		}
-		console.info('min', arr[iMin]);
-		console.info('max', arr[iMax]);
+		// console.info('min', arr[iMin]);
+		// console.info('max', arr[iMax]);
 		// Place the identified min and max to their correct position, i.e. at the extreme end.
 		if (iMax === j) {
 			arr[iCur] < arr[iMax] && (arr = swap(arr, iCur, iMax));
@@ -51,4 +54,4 @@ var doubleSort = arr => {
 	return arr;
 };
 
-doubleSort([10, 6, 3, 1, 7, 9, 4, 5, 2, 7]);
+doubleSort(Array.from({ length: 500 }, () => Math.floor(Math.random() * 100000000)));

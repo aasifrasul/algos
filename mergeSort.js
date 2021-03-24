@@ -23,7 +23,8 @@ function TopDownSplitMerge(arr2, iBegin, iEnd, arr1) {
 // Right source half is arr1[iMiddle:iEnd-1   ].
 // Result is            arr2[ iBegin:iEnd-1   ].
 function TopDownMerge(arr1, iBegin, iMiddle, iEnd, arr2) {
-    let i = iBegin, j = iMiddle;
+    let i = iBegin,
+        j = iMiddle;
 
     // While there are elements in the left or right runs...
     for (k = iBegin; k < iEnd; k++) {
